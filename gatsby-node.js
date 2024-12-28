@@ -9,6 +9,7 @@ exports.createPages = async ({ actions, graphql }) => {
       allWpPage {
         nodes {
           databaseId
+          title
           blocks
           uri
         }
@@ -20,6 +21,9 @@ exports.createPages = async ({ actions, graphql }) => {
     createPage({
       path: page.uri,
       component: pageTemplate,
+      context: {
+        title: page.title,
+      },
     });
   }
 };

@@ -1,13 +1,14 @@
+import { faHourglass1 } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
-import { BlockRendererProvider } from "@webdeveducation/wp-block-tools";
 
-// const Page = (props) => {
-//   console.log("Props: ", props);
-//   return <BlockRendererProvider allBlocks={props.pageContext.blocks} />;
-// };
-
-const Page = () => {
-  return <div>This is page template</div>;
+const Page = ({ pageContext }) => {
+  const { title } = pageContext;
+  return (
+    <div>
+      <h1>{title}</h1>
+      <p>This is page template</p>
+    </div>
+  );
 };
 
 export default Page;
