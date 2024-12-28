@@ -10,7 +10,6 @@ import { MediaText } from "../components";
 export const BlockRendererComponents = (block) => {
   switch (block.name) {
     case "core/media-text": {
-      console.log("Render component: ", block);
       return (
         <MediaText
           key={block.id}
