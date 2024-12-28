@@ -16,13 +16,7 @@ const Page = (props) => {
         switch (block.name) {
           case "core/media-text": {
             const content = (
-              <div
-                className={`flex p-4 ${
-                  block.attributes.verticalAlignment === "center"
-                    ? "items-center"
-                    : ""
-                }`}
-              >
+              <div className={`flex items-center p-4`}>
                 <div>
                   <BlockRenderer blocks={block.innerBlocks} />
                 </div>
