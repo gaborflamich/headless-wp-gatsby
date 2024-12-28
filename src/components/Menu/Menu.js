@@ -1,51 +1,31 @@
-import { graphql, useStaticQuery } from "gatsby";
 import React from "react";
+import { useStaticQuery, graphql } from "gatsby";
 
 export const Menu = () => {
   const data = useStaticQuery(graphql`
-    query MainMenuQuery {
-      acfOptionsMainMenu {
-        mainMenu {
-          callToActionButton {
-            destination {
-              nodes {
-                ... on Page {
-                  uri
-                }
-              }
-            }
+    query MyQuery {
+      wpMenu {
+        menuItems {
+          nodes {
             label
-          }
-          menuItems {
-            root {
-              destination {
-                nodes {
-                  ... on Page {
-                    uri
-                  }
-                }
-              }
-              label
-            }
-            subMenuItems {
-              destination {
-                nodes {
-                  ... on Page {
-                    uri
-                  }
-                }
-              }
-              label
-            }
+            url
           }
         }
       }
     }
   `);
-  console.log("MAIN MENU DATA: ", data);
+
+  const menuItems = data.wpMenu.menuItems.nodes;
+
   return (
-    <div className="sticky top-0 z-20 h-16 bg-emerald-800 px-4 font-bold text-white">
-      Menu
-    </div>
+    <nav>
+      <ul>
+        {menuItems.map((item, index) => (
+          <li key={index}>
+            <a href={item.url}>{item.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 };
