@@ -1,13 +1,9 @@
 import React from "react";
+import { BlockRendererProvider } from "@webdeveducation/wp-block-tools";
 
-const Page = ({ pageContext }) => {
-  const { title } = pageContext;
-  return (
-    <div>
-      <h1>{title}</h1>
-      <p>This is page template</p>
-    </div>
-  );
+const Page = (props) => {
+  console.log("Page props: ", props);
+  return <BlockRendererProvider allBlocks={props.pageContext.blocks} />;
 };
 
 export default Page;
