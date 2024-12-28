@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.container {
+  max-width: 1200px;
+  margin: auto !important;
+  width: 100%;
+}
+
+.wp-block-media-text__content .wp-block-heading {
+  margin-bottom: 30px;
+}
