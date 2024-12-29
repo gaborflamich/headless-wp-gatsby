@@ -6,6 +6,13 @@ module.exports = {
     "./src/templates/**/*.{js,jsx,ts,tsx}",
     "./src/config/**/*.{js,jsx,ts,tsx}",
   ],
-  theme: {},
+  theme: {
+    extend: {
+      colors: {
+        "color-primary": "var(--wp--preset--color--primary)",
+        "color-secondary": "var(--wp--preset--color--secondary)",
+      },
+    },
+  },
   plugins: [],
 };

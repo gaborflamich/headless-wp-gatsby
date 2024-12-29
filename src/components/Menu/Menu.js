@@ -69,7 +69,7 @@ export const Menu = () => {
                 to={item.url}
                 className={`nav-menu-item-link block p-2 no-underline transition duration-200 ease-in-out ${
                   isCta
-                    ? "rounded-md bg-emerald-600 px-4 py-2 text-white hover:bg-emerald-700"
+                    ? "rounded-md bg-yellow-400 px-4 py-2 text-black hover:bg-yellow-500"
                     : "hover:text-white"
                 }`}
               >
