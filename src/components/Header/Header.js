@@ -15,7 +15,7 @@ export const Header = () => {
   return (
     <header
       className={`${isHomePage ? "mb-0" : "mb-10"}
-    header bg-emerald-400 py-4 font-bold text-black`}
+    header bg-emerald-900 py-4 font-bold text-white`}
     >
       <div className="container flex justify-between">
         <Logo />

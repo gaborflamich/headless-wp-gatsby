@@ -49,30 +49,38 @@ export const Menu = () => {
       <ul
         className={`${ulClassName} ${
           level > 0
-            ? "absolute z-30 w-52 bg-emerald-500 text-lg opacity-0 shadow-lg transition-opacity duration-200 ease-in-out group-hover:opacity-100"
+            ? "absolute z-30 w-52 bg-emerald-500 opacity-0 shadow-lg transition-opacity duration-200 ease-in-out group-hover:opacity-100"
             : "space-x-4"
-        } flex justify-between group-hover:block`}
+        } flex justify-between text-lg group-hover:block`}
       >
-        {items.map((item) => (
-          <li
-            key={item.id}
-            className={`nav-menu-item group relative ${
-              item.children && item.children.length > 0
-                ? "nav-menu-item-has-children"
-                : ""
-            } ${item.cssClasses && item.cssClasses.join(" ")}`}
-          >
-            <Link
-              to={item.url}
-              className="nav-menu-item-link block p-2 no-underline transition duration-200 ease-in-out hover:text-white"
+        {items.map((item) => {
+          const isCta = item.cssClasses.includes("menu-item-cta");
+
+          return (
+            <li
+              key={item.id}
+              className={`nav-menu-item group relative ${
+                item.children && item.children.length > 0
+                  ? "nav-menu-item-has-children"
+                  : ""
+              } ${item.cssClasses && item.cssClasses.join(" ")}`}
             >
-              {item.label}
-            </Link>
-            {item.children && item.children.length > 0 && (
-              <MenuList items={item.children} level={level + 1} />
-            )}
-          </li>
-        ))}
+              <Link
+                to={item.url}
+                className={`nav-menu-item-link block p-2 no-underline transition duration-200 ease-in-out ${
+                  isCta
+                    ? "rounded-md bg-emerald-600 px-4 py-2 text-white hover:bg-emerald-700"
+                    : "hover:text-white"
+                }`}
+              >
+                {item.label}
+              </Link>
+              {item.children && item.children.length > 0 && (
+                <MenuList items={item.children} level={level + 1} />
+              )}
+            </li>
+          );
+        })}
       </ul>
     );
   };
