@@ -1,5 +1,5 @@
 import React from "react";
-import { useStaticQuery, graphql } from "gatsby";
+import { useStaticQuery, graphql, Link } from "gatsby";
 
 export const Menu = () => {
   const data = useStaticQuery(graphql`
@@ -43,22 +43,31 @@ export const Menu = () => {
 
   const MenuList = ({ items, level = 0 }) => {
     // Meghatározzuk a megfelelő className-t a szint alapján
-    const ulClassName = level === 0 ? "desktop-menu-list" : `sub-menu-${level}`;
+    const ulClassName = level === 0 ? "nav-menu-list" : `sub-menu-${level}`;
 
     return (
-      <ul className={ulClassName}>
+      <ul
+        className={`${ulClassName} ${
+          level > 0
+            ? "absolute z-30 w-52 bg-emerald-500 text-lg opacity-0 shadow-lg transition-opacity duration-200 ease-in-out group-hover:opacity-100"
+            : "space-x-4"
+        } flex justify-between group-hover:block`}
+      >
         {items.map((item) => (
           <li
             key={item.id}
-            className={`menu-item ${
+            className={`nav-menu-item group relative ${
               item.children && item.children.length > 0
-                ? "menu-item-has-children"
+                ? "nav-menu-item-has-children"
                 : ""
             } ${item.cssClasses && item.cssClasses.join(" ")}`}
           >
-            <a href={item.url} className="menu-item-link">
+            <Link
+              to={item.url}
+              className="nav-menu-item-link block p-2 no-underline transition duration-200 ease-in-out hover:text-white"
+            >
               {item.label}
-            </a>
+            </Link>
             {item.children && item.children.length > 0 && (
               <MenuList items={item.children} level={level + 1} />
             )}
@@ -72,7 +81,7 @@ export const Menu = () => {
   const menuTree = buildMenuTree(menuItems);
 
   return (
-    <nav className="desktop-menu">
+    <nav className="nav-menu">
       <MenuList items={menuTree} />
     </nav>
   );

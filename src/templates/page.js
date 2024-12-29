@@ -5,11 +5,12 @@ import { Link } from "gatsby";
 import { Layout } from "../components/Layout/Layout";
 
 const Page = (props) => {
-  console.log("Page props: ", props);
+  const { title, blocks } = props.pageContext;
+
   return (
-    <Layout>
+    <Layout title={title}>
       <BlockRendererProvider
-        allBlocks={props.pageContext.blocks}
+        allBlocks={blocks}
         renderComponent={BlockRendererComponents}
         siteDomain={process.env.GATSBY_WP_URL}
         customInternalLinkComponent={(

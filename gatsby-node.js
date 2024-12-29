@@ -16,6 +16,7 @@ exports.createPages = async ({ actions, graphql }) => {
       allWpPage {
         nodes {
           databaseId
+          title
           blocks
           uri
         }
@@ -29,6 +30,7 @@ exports.createPages = async ({ actions, graphql }) => {
 
   for (let i = 0; i < data.allWpPage.nodes.length; i++) {
     const page = data.allWpPage.nodes[i];
+
     let blocks = page.blocks;
     blocks = assignIds(blocks);
     blocks = await assignGatsbyImage({
@@ -40,6 +42,7 @@ exports.createPages = async ({ actions, graphql }) => {
       path: page.uri,
       component: pageTemplate,
       context: {
+        title: page.title,
         blocks,
       },
     });
