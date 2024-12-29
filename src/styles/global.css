@@ -2,6 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Aboreto";
+  font-style: normal;
+  font-display: swap;
+  src: url(/fonts/Aboreto-Regular.woff2) format("woff2");
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/Poppins-Regular.woff2) format("woff2");
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/fonts/Poppins-Bold.woff2) format("woff2");
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/Poppins-Italic.woff2) format("woff2");
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/fonts/Poppins-BoldItalic.woff2) format("woff2");
+}
+
 .container {
   max-width: 1200px;
   margin: auto !important;
