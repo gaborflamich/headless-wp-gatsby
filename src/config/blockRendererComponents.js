@@ -5,20 +5,48 @@ import {
   getClasses,
 } from "@webdeveducation/wp-block-tools";
 
-import { MediaText } from "../components";
-import { CallToActionButton } from "../components/CallToActionButton";
+import { MediaText, CallToActionButton, Cover } from "../components";
+import { GatsbyImage } from "gatsby-plugin-image";
 
 export const BlockRendererComponents = (block) => {
   switch (block.name) {
+    case "wpf/tickitem": {
+      return <div>tick item</div>;
+    }
+    case "core/cover": {
+      console.log("Cover Block: ", block);
+      return (
+        <Cover
+          key={block.id}
+          style={getStyles(block)}
+          className={getClasses(block)}
+          gatsbyImage={block.attributes.gatsbyImage}
+        >
+          <BlockRenderer blocks={block.innerBlocks} />
+        </Cover>
+      );
+    }
+    case "core/image": {
+      return (
+        <figure key={block.id} className={getClasses(block)}>
+          <GatsbyImage
+            style={getStyles(block)}
+            image={block.attributes.gatsbyImage}
+            alt={block.attributes.alt || ""}
+            width={block.attributes.width}
+            height={block.attributes.height}
+          />
+        </figure>
+      );
+    }
     case "wpf/ctabutton": {
-      console.log("CTA Button data: ", block);
       const alignMap = {
         left: "text-left",
         center: "text-center",
         right: "text-right",
       };
       return (
-        <div className={alignMap[block.attributes.data.align]}>
+        <div key={block.id} className={alignMap[block.attributes.data.align]}>
           <CallToActionButton
             destination={block.attributes.data.destination}
             label={block.attributes.data.label}
