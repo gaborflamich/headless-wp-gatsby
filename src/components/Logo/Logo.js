@@ -9,7 +9,7 @@ export const Logo = () => {
         <StaticImage
           src="../../../static/icon.png"
           layout="fixed"
-          height="30"
+          height={30}
           alt="Logo"
         />
       </Link>

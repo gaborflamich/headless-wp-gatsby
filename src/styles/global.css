@@ -50,3 +50,6 @@
 .wp-block-media-text__content .wp-block-heading {
   margin-bottom: 30px;
 }
+.wp-block-buttons.is-layout-flex {
+  justify-content: center !important;
+}
