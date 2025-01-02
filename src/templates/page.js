@@ -46,7 +46,7 @@ export const query = graphql`
   }
 `;
 
-export const Head = (data) => {
+export const Head = ({ data }) => {
   const page = data.wpPage || data.wpCar;
   return (
     <>
