@@ -28,8 +28,11 @@ export const ContactForm7 = ({ formId, formMarkup }) => {
       }
     }
   }, [formRef, formId]);
+
   return hasSubmitted ? (
-    <div>thank you</div>
+    <div className="bg-emerald-900 p-4 text-white">
+      Thank you for your message
+    </div>
   ) : (
     <fieldset ref={formRef} dangerouslySetInnerHTML={{ __html: formMarkup }} />
   );

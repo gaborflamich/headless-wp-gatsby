@@ -25,7 +25,7 @@ export const BlockRendererComponents = (block) => {
           formId={block.attributes.id}
           formMarkup={block.attributes.formMarkup
             .replace('novalidate="novalidate"', "")
-            .split('aria-reqired="true"')
+            .split('aria-required="true"')
             .join('aria-required="true" required')}
         />
       );
