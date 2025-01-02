@@ -5,13 +5,31 @@ import {
   getClasses,
 } from "@webdeveducation/wp-block-tools";
 
-import { MediaText, CallToActionButton, Cover, TickItem } from "../components";
+import {
+  MediaText,
+  CallToActionButton,
+  Cover,
+  TickItem,
+  ContactForm7,
+} from "../components";
 import { GatsbyImage } from "gatsby-plugin-image";
 import numeral from "numeral";
 import { CarSearch } from "../components/CarSearch";
 
 export const BlockRendererComponents = (block) => {
   switch (block.name) {
+    case "contact-form-7/contact-form-selector": {
+      return (
+        <ContactForm7
+          key={block.id}
+          formId={block.attributes.id}
+          formMarkup={block.attributes.formMarkup
+            .replace('novalidate="novalidate"', "")
+            .split('aria-reqired="true"')
+            .join('aria-required="true" required')}
+        />
+      );
+    }
     case "wpf/carsearch": {
       return (
         <CarSearch

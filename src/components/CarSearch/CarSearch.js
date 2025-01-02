@@ -17,9 +17,9 @@ export const CarSearch = ({ style, className }) => {
   if (typeof window !== "undefined") {
     const params = new URLSearchParams(window.location.search);
     page = parseInt(params.get("page") || "1");
-    defaultMaxPrice = params.get("defaultMaxPrice");
-    defaultMinPrice = params.get("defaultMin");
-    defaultColor = params.get("defaultColor");
+    defaultMaxPrice = params.get("maxPrice");
+    defaultMinPrice = params.get("minPrice");
+    defaultColor = params.get("color");
   }
 
   let metaQuery = "{}";
@@ -29,15 +29,15 @@ export const CarSearch = ({ style, className }) => {
     let maxPriceQuery = "";
 
     if (defaultColor) {
-      colorQuery = `{key: "color", compare: EQUAL_TO, value: "${defaultColor}}`;
+      colorQuery = `{key: "color", compare: EQUAL_TO, value: "${defaultColor}"}`;
     }
 
     if (defaultMinPrice) {
-      minPriceQuery = `{key: "price", compare: GREATER_THAN_OR_EQUAL_TO, type: NUMERIC, value: "${defaultMinPrice}}`;
+      minPriceQuery = `{key: "price", compare: GREATER_THAN_OR_EQUAL_TO, type: NUMERIC, value: "${defaultMinPrice}"}`;
     }
 
     if (defaultMaxPrice) {
-      maxPriceQuery = `{key: "price", compare: LESS_THAN_OR_EQUAL_TO, type: NUMERIC, value: "${defaultMaxPrice}}`;
+      maxPriceQuery = `{key: "price", compare: LESS_THAN_OR_EQUAL_TO, type: NUMERIC, value: "${defaultMaxPrice}"}`;
     }
 
     metaQuery = `{

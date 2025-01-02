@@ -6,6 +6,7 @@ import { Layout } from "../components/Layout/Layout";
 
 const Page = (props) => {
   const { title, blocks } = props.pageContext;
+  console.log("PAGE PROPS: ", props);
 
   return (
     <Layout title={title}>
