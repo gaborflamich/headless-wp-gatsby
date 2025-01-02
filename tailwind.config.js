@@ -8,6 +8,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        heading: "var(--wp--preset--font-family--aboreto)"
+      },
       colors: {
         "color-primary": "var(--wp--preset--color--primary)",
         "color-secondary": "var(--wp--preset--color--secondary)",

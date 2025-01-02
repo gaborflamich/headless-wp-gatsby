@@ -49,7 +49,7 @@ export const Menu = () => {
       <ul
         className={`${ulClassName} ${
           level > 0
-            ? "absolute z-30 w-52 bg-emerald-500 opacity-0 shadow-lg transition-opacity duration-200 ease-in-out group-hover:opacity-100"
+            ? "d-none absolute z-30 hidden w-52 bg-emerald-500 shadow-lg"
             : "space-x-4"
         } flex justify-between text-lg group-hover:block`}
       >
@@ -67,7 +67,7 @@ export const Menu = () => {
             >
               <Link
                 to={item.url}
-                className={`nav-menu-item-link block p-2 no-underline transition duration-200 ease-in-out ${
+                className={`nav-menu-item-link block p-2 no-underline  ${
                   isCta
                     ? "rounded-md bg-yellow-400 px-4 py-2 text-black hover:bg-yellow-500"
                     : "hover:text-white"

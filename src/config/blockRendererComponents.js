@@ -5,16 +5,40 @@ import {
   getClasses,
 } from "@webdeveducation/wp-block-tools";
 
-import { MediaText, CallToActionButton, Cover } from "../components";
+import { MediaText, CallToActionButton, Cover, TickItem } from "../components";
 import { GatsbyImage } from "gatsby-plugin-image";
+import numeral from "numeral";
+import { CarSearch } from "../components/CarSearch";
 
 export const BlockRendererComponents = (block) => {
   switch (block.name) {
+    case "wpf/carsearch": {
+      return (
+        <CarSearch
+          key={block.id}
+          style={getStyles(block)}
+          className={getClasses(block)}
+        />
+      );
+    }
+    case "wpf/carprice": {
+      return (
+        <div className="flex justify-center" key={block.id}>
+          <div className="rounded-xl bg-black py-3 px-5 font-heading text-3xl text-white">
+            {numeral(block.attributes.price).format("0,0")} €
+          </div>
+        </div>
+      );
+    }
     case "wpf/tickitem": {
-      return <div>tick item</div>;
+      return (
+        <TickItem key={block.id}>
+          {" "}
+          <BlockRenderer blocks={block.innerBlocks} />
+        </TickItem>
+      );
     }
     case "core/cover": {
-      console.log("Cover Block: ", block);
       return (
         <Cover
           key={block.id}

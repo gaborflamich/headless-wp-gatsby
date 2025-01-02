@@ -53,3 +53,7 @@
 .wp-block-buttons.is-layout-flex {
   justify-content: center !important;
 }
+
+.wp-site-blocks strong {
+  font-weight: bold;
+}
