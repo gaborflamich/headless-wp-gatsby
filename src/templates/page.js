@@ -48,6 +48,7 @@ export const query = graphql`
 
 export const Head = ({ data }) => {
   const page = data.wpPage || data.wpCar;
+  console.log("SEO TITLE: ", page.seo?.title);
   return (
     <>
       <title>{page?.seo?.title || ""}</title>
