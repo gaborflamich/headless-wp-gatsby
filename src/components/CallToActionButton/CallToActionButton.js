@@ -12,9 +12,7 @@ export const CallToActionButton = ({
       to={destination}
       className={` ${isActive ? "cursor-default bg-yellow-400" : ""}
         
-      ${
-        fullWidth ? "block" : "inline-block"
-      } w-50 mt-5 inline-block rounded-lg bg-yellow-500 p-3 text-center font-bold text-black no-underline hover:bg-yellow-400`}
+      ${fullWidth ? "block" : "inline-block"} btn`}
     >
       {label}
     </Link>

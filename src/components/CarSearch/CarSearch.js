@@ -5,20 +5,51 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTag } from "@fortawesome/free-solid-svg-icons";
 import { CallToActionButton } from "../CallToActionButton";
 import { PageNumber } from "./PageNumber";
+import { navigate } from "gatsby";
 
 export const CarSearch = ({ style, className }) => {
   const pageSize = 3;
   let page = 1;
+  let defaultMaxPrice = "";
+  let defaultMinPrice = "";
+  let defaultColor = "";
 
   if (typeof window !== "undefined") {
     const params = new URLSearchParams(window.location.search);
     page = parseInt(params.get("page") || "1");
+    defaultMaxPrice = params.get("defaultMaxPrice");
+    defaultMinPrice = params.get("defaultMin");
+    defaultColor = params.get("defaultColor");
+  }
+
+  let metaQuery = "{}";
+  if (defaultColor || defaultMaxPrice || defaultMinPrice) {
+    let colorQuery = "";
+    let minPriceQuery = "";
+    let maxPriceQuery = "";
+
+    if (defaultColor) {
+      colorQuery = `{key: "color", compare: EQUAL_TO, value: "${defaultColor}}`;
+    }
+
+    if (defaultMinPrice) {
+      minPriceQuery = `{key: "price", compare: GREATER_THAN_OR_EQUAL_TO, type: NUMERIC, value: "${defaultMinPrice}}`;
+    }
+
+    if (defaultMaxPrice) {
+      maxPriceQuery = `{key: "price", compare: LESS_THAN_OR_EQUAL_TO, type: NUMERIC, value: "${defaultMaxPrice}}`;
+    }
+
+    metaQuery = `{
+      relation: AND
+      metaArray: [${colorQuery}${minPriceQuery}${maxPriceQuery}]
+    }`;
   }
 
   const { data, loading, error } = useQuery(
     gql`
       query CarQuery($size: Int!, $offset: Int!) {
-        allCar(where: { offsetPagination: { size: $size, offset: $offset } }) {
+        allCar(where: {metaQuery: ${metaQuery} offsetPagination: { size: $size, offset: $offset } }) {
           nodes {
             databaseId
             title
@@ -53,8 +84,53 @@ export const CarSearch = ({ style, className }) => {
 
   console.log("DATA: ", data, loading, error);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const params = new URLSearchParams(formData);
+    params.set("page", "1");
+    navigate(`${window.location.pathname}?${params.toString()}`);
+  };
+
   return (
     <div style={style} className={className}>
+      <fieldset>
+        <form
+          onSubmit={handleSubmit}
+          className="mb-10 grid grid-cols-1 gap-4 rounded-lg bg-gray-100 p-4 md:grid-cols-[1fr_1fr_1fr_110px]"
+        >
+          <div>
+            <strong>Min price:</strong>
+            <input
+              type="number"
+              name="minPrice"
+              defaultValue={defaultMinPrice}
+            />
+          </div>
+          <div>
+            <strong>Max price:</strong>
+            <input
+              type="number"
+              name="maxPrice"
+              defaultValue={defaultMaxPrice}
+            />
+          </div>
+          <div>
+            <strong>Color:</strong>
+            <select name="color" defaultValue={defaultColor}>
+              <option value="">Any color</option>
+              <option value="red">Red</option>
+              <option value="white">White</option>
+              <option value="green">Green</option>
+            </select>
+          </div>
+          <div className="mt-auto flex">
+            <button type="submit" className="btn">
+              Submit
+            </button>
+          </div>
+        </form>
+      </fieldset>
       {!loading && !!data?.allCar?.nodes?.length && (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {data.allCar.nodes.map((car) => (

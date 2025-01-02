@@ -41,6 +41,19 @@
   src: url(/fonts/Poppins-BoldItalic.woff2) format("woff2");
 }
 
+@layer base {
+  input,
+  select {
+    @apply mx-4 mx-0 mt-2 w-full rounded-sm rounded-md border border-slate-200 px-4 py-2;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply mt-5 inline-block rounded-lg bg-yellow-500 p-3 text-center font-bold text-black no-underline hover:bg-yellow-400;
+  }
+}
+
 .container {
   max-width: 1200px;
   margin: auto !important;
